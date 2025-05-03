@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavelinMC</title>
+  <script defer src="scripts.js"></script>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { primary: "#2563eb", secondary: "#3b82f6" },
+          borderRadius: {
+            none: "0px",
+            sm: "4px",
+            DEFAULT: "8px",
+            md: "12px",
+            lg: "16px",
+            xl: "20px",
+            "2xl": "24px",
+            "3xl": "32px",
+            full: "9999px",
+            button: "8px",
+          },
+        },
+      },
+    };
+  </script>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" />
+  
+  <!-- External Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="min-h-screen flex flex-col bg-gray-900">
+  <!-- Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 bg-gray-800 shadow-md z-50">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="#" class="text-2xl font-bold tracking-tight text-primary">JavelinMC</a>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="#" class="nav-link text-gray-200 font-medium hover:text-primary transition-colors">Shop</a>
+        <a href="#" class="nav-link text-gray-200 font-medium hover:text-primary transition-colors">Support</a>
+        <a href="#" class="nav-link text-gray-200 font-medium hover:text-primary transition-colors">Rules</a>
+      </nav>
+      <div class="hidden md:flex items-center space-x-4">
+        <button id="themeToggle" class="w-10 h-10 flex items-center justify-center text-gray-200 hover:text-primary transition-colors">
+          <i class="ri-sun-line ri-lg"></i>
+        </button>
+        <a href="#" class="w-10 h-10 flex items-center justify-center text-gray-200 hover:text-primary transition-colors relative">
+          <i class="ri-shopping-cart-line ri-lg"></i>
+          <span class="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+        </a>
+      </div>
+      <button class="md:hidden w-10 h-10 flex items-center justify-center text-gray-200">
+        <i class="ri-menu-line ri-lg"></i>
+      </button>
+    </div>
+    <div class="hidden md:hidden bg-gray-800 px-4 py-3 shadow-inner">
+      <nav class="flex flex-col space-y-4">
+        <a href="#" class="text-gray-200 font-medium hover:text-primary py-2 transition-colors">Shop</a>
+        <a href="#" class="text-gray-200 font-medium hover:text-primary py-2 transition-colors">Support</a>
+        <a href="#" class="text-gray-200 font-medium hover:text-primary py-2 transition-colors">Rules</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow pt-24 pb-16">
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden mb-16">
+      <div class="absolute inset-0">
+        <img src="assets/background.jpg" class="w-full h-full object-cover object-center" />
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+      </div>
+      <div class="container mx-auto px-4 py-20 relative">
+        <div class="max-w-2xl text-white">
+          <h1 class="text-4xl md:text-5xl font-bold mb-6">Welcome to JavelinMC</h1>
+          <p class="text-lg mb-8">Паша гей</p>
+          <div class="bg-white/10 backdrop-blur-md rounded-lg p-6 space-y-4 w-fit">
+            <div class="flex items-center space-x-3">
+              <i class="ri-server-line text-primary"></i>
+              <p class="font-mono">IP: play.super.mc</p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <i class="ri-game-line text-primary"></i>
+              <p>Version: 1.16.5 - 1.20.1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Cards Section -->
+    <div class="container mx-auto max-w-6xl px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center">
+        <!-- Product Card 1 -->
+        <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden w-full max-w-sm transition-transform hover:shadow-lg border border-gray-700">
+          <div class="h-48 overflow-hidden">
+            <img src="assets/headphones.jpg" alt="Premium Wireless Headphones" class="w-full h-full object-cover object-top transition-transform hover:scale-105" />
+          </div>
+          <div class="p-4">
+            <h2 class="text-xl font-bold text-gray-200 mb-4">Premium Wireless Headphones</h2>
+            <button class="w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-button font-medium flex items-center justify-center whitespace-nowrap transition-colors">
+              <i class="ri-shopping-cart-line mr-2"></i>
+              Buy Now
+            </button>
+          </div>
+        </div>
+        <!-- Product Card 2 -->
+        <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden w-full max-w-sm transition-transform hover:shadow-lg border border-gray-700">
+          <div class="h-48 overflow-hidden">
+            <img src="assets/keyboard.jpg" alt="Gaming Mechanical Keyboard" class="w-full h-full object-cover object-top transition-transform hover:scale-105" />
+          </div>
+          <div class="p-4">
+            <h2 class="text-xl font-bold text-gray-200 mb-4">Gaming Mechanical Keyboard</h2>
+            <button class="w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-button font-medium flex items-center justify-center whitespace-nowrap transition-colors">
+              <i class="ri-shopping-cart-line mr-2"></i>
+              Buy Now
+            </button>
+          </div>
+        </div>
+        <!-- Product Card 3 -->
+        <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden w-full max-w-sm transition-transform hover:shadow-lg border border-gray-700">
+          <div class="h-48 overflow-hidden">
+            <img src="assets/mouse.jpg" alt="Gaming Mouse" class="w-full h-full object-cover object-top transition-transform hover:scale-105" />
+          </div>
+          <div class="p-4">
+            <h2 class="text-xl font-bold text-gray-200 mb-4">Gaming Mouse</h2>
+            <button class="w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-button font-medium flex items-center justify-center whitespace-nowrap transition-colors">
+              <i class="ri-shopping-cart-line mr-2"></i>
+              Buy Now
+            </button>
+          </div>
+        </div>
+         <!-- Product Card 4 -->
+         <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden w-full max-w-sm transition-transform hover:shadow-lg border border-gray-700">
+         <div class="h-48 overflow-hidden">
+           <img src="assets/chair.jpg" alt="Gaming Chair" class="w-full h-full object-cover object-top transition-transform hover:scale-105"/>
+         </div>
+         <div class="p-4">
+           <h2 class="text-xl font-bold text-gray-200 mb-4">Gaming Chair</h2>
+           <button class="w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-button font-medium flex items-center justify-center whitespace-nowrap transition-colors">
+             <i class="ri-shopping-cart-line mr-2"></i>
+             Buy Now
+           </button>
+         </div>
+       </div>
+     </div>
+   </div>
+ </main>
+  <!-- Footer -->
+  <footer>
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col items-center">
+        <div class="font-['Pacifico'] text-2xl text-primary mb-6">JavelinMC</div>
+        <div class="flex flex-wrap justify-center mb-8 gap-4">
+          <a href="https://t.me/jav_elinMC" class="social-icon">
+            <i class="ri-telegram-fill text-gray-200"></i>
+          </a>
+          <a href="https://discord.gg/UCaW56CFwp" class="social-icon">
+            <i class="ri-discord-fill text-gray-200"></i>
+          </a>
+          <a href="https://www.tiktok.com/@javelinmc0?_t=ZM-8v4fh4i4CMY&_r=1" class="social-icon">
+            <i class="ri-tiktok-fill text-gray-200"></i>
+          </a>
+        </div>
+        <div class="text-center text-gray-400 text-sm">
+          <p>© 2025 JavelinMC. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

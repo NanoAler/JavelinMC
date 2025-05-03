@@ -1,0 +1,95 @@
+/* Custom Tailwind Overrides */
+:where([class^="ri-"])::before {
+    content: "\f3c2";
+  }
+  
+  /* Light Theme Overrides */
+  .light-theme {
+    background-color: #ffffff;
+  }
+  
+  .light-theme header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .light-theme .nav-link {
+    color: #374151;
+  }
+  
+  .light-theme footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .light-theme .social-icon{
+    background-color: #e5e7eb;
+  }
+  
+  .light-theme .bg-gray-800 {
+    background-color: #ffffff;
+  }
+  
+  .light-theme .text-gray-200 {
+    color: #374151;
+  }
+  
+  .light-theme .border-gray-700 {
+    border-color: #e5e7eb;
+  }
+  
+  /* Navigation Link Hover Effect */
+  .nav-link {
+    position: relative;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #2563eb;
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Social Icon Hover Effect */
+  /* .social-icon:hover {
+    transform: translateY(-3px);
+    transition: transform 0.3s ease;
+  } */
+  
+  /* Input Styling */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  footer {
+    background-color: #2d3748; 
+    box-shadow: inset 0px 0px 6px -3px rgba(0, 0, 0, 0.5); 
+    padding-top: 2.5rem; 
+    padding-bottom: 2rem; 
+    border-top: 1px solid #4a5568;
+  }
+
+  .social-icon {
+    width: 2.5rem; 
+    height: 2.5rem; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background-color: #374151;
+    border-radius: 9999px;
+    transition: all 0.15s ease-in-out;
+  }
+  
+  .social-icon:hover {
+    background-color: #4b5563;
+  }
