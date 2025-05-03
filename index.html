@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JavelinMC</title>
   <script defer src="scripts.js"></script>
+  <script src="cart-toggle.js"></script>
+  <style>
+    :where([class^="ri-"])::before { content: "\f3c2"; }
+    body {
+        background-color: #f9fafb;
+    }
+    .cart-sidebar {
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+    }
+    .cart-sidebar.open {
+        transform: translateX(0);
+    }
+    .overlay {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+    .overlay.open {
+        opacity: 1;
+        visibility: visible;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+</style>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com/3.4.16"></script>
@@ -41,7 +72,7 @@
   <!-- External Styles -->
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="min-h-screen flex flex-col bg-gray-900">
+<body class="min-h-screen flex flex-col bg-gray-900" style="">
   <!-- Navigation Bar -->
   <header class="fixed top-0 left-0 right-0 bg-gray-800 shadow-md z-50">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -55,7 +86,7 @@
         <button id="themeToggle" class="w-10 h-10 flex items-center justify-center text-gray-200 hover:text-primary transition-colors">
           <i class="ri-sun-line ri-lg"></i>
         </button>
-        <a href="#" class="w-10 h-10 flex items-center justify-center text-gray-200 hover:text-primary transition-colors relative">
+        <a id="cart-toggle" class="w-10 h-10 flex items-center justify-center text-gray-200 hover:text-primary transition-colors relative">
           <i class="ri-shopping-cart-line ri-lg"></i>
           <span class="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
         </a>
@@ -105,58 +136,233 @@
         <!-- Product Card 1 -->
         <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden w-full max-w-sm transition-transform hover:shadow-lg border border-gray-700">
           <div class="h-48 overflow-hidden">
-            <img src="assets/headphones.jpg" alt="Premium Wireless Headphones" class="w-full h-full object-cover object-top transition-transform hover:scale-105" />
+            <img src="assets/5k_rub.jpg" alt="Купюра" class="w-full h-full object-cover object-top transition-transform hover:scale-105" />
           </div>
           <div class="p-4">
-            <h2 class="text-xl font-bold text-gray-200 mb-4">Premium Wireless Headphones</h2>
+            <h2 class="text-xl font-bold text-gray-200 mb-2">Купюра</h2>
+            <h3 class="text-xm text-gray-200 ml-1 mb-7">Покупка модулей и оружия</h3>
             <button class="w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-button font-medium flex items-center justify-center whitespace-nowrap transition-colors">
               <i class="ri-shopping-cart-line mr-2"></i>
-              Buy Now
+              Купить
             </button>
           </div>
         </div>
         <!-- Product Card 2 -->
         <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden w-full max-w-sm transition-transform hover:shadow-lg border border-gray-700">
           <div class="h-48 overflow-hidden">
-            <img src="assets/keyboard.jpg" alt="Gaming Mechanical Keyboard" class="w-full h-full object-cover object-top transition-transform hover:scale-105" />
+            <img src="assets/box.jpg" alt="Коробка" class="w-full h-full object-cover object-top transition-transform hover:scale-105" />
           </div>
           <div class="p-4">
-            <h2 class="text-xl font-bold text-gray-200 mb-4">Gaming Mechanical Keyboard</h2>
+            <h2 class="text-xl font-bold text-gray-200 mb-2">Коробка</h2>
+            <h3 class="text-xm text-gray-200 ml-1 mb-7">Покупка техники и модулей</h3>
             <button class="w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-button font-medium flex items-center justify-center whitespace-nowrap transition-colors">
               <i class="ri-shopping-cart-line mr-2"></i>
-              Buy Now
+              Купить
             </button>
           </div>
         </div>
         <!-- Product Card 3 -->
         <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden w-full max-w-sm transition-transform hover:shadow-lg border border-gray-700">
           <div class="h-48 overflow-hidden">
-            <img src="assets/mouse.jpg" alt="Gaming Mouse" class="w-full h-full object-cover object-top transition-transform hover:scale-105" />
+            <img src="assets/SCAR-H.jpg" alt="SCAR-H" class="w-full h-full object-cover object-top transition-transform hover:scale-105" />
           </div>
           <div class="p-4">
-            <h2 class="text-xl font-bold text-gray-200 mb-4">Gaming Mouse</h2>
+            <h2 class="text-xl font-bold text-gray-200 mb-0.5">[Premium] SCAR-H</h2>
+            <h3 class="text-xm text-gray-200 ml-1 mb-0.5">DMG:13.75</h3>
+            <h3 class="text-xm text-gray-200 ml-1 mb-2">DPS:600</h3>
             <button class="w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-button font-medium flex items-center justify-center whitespace-nowrap transition-colors">
               <i class="ri-shopping-cart-line mr-2"></i>
-              Buy Now
+              Купить
             </button>
           </div>
         </div>
          <!-- Product Card 4 -->
          <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden w-full max-w-sm transition-transform hover:shadow-lg border border-gray-700">
          <div class="h-48 overflow-hidden">
-           <img src="assets/chair.jpg" alt="Gaming Chair" class="w-full h-full object-cover object-top transition-transform hover:scale-105"/>
+           <img src="assets/AA12.jpg" alt="AA12" class="w-full h-full object-cover object-top transition-transform hover:scale-105"/>
          </div>
          <div class="p-4">
-           <h2 class="text-xl font-bold text-gray-200 mb-4">Gaming Chair</h2>
+           <h2 class="text-xl font-bold text-gray-200 mb-0.5">[Premium] AA12</h2>
+           <h3 class="text-xm text-gray-200 ml-1 mb-0.5">DMG:30</h3>
+           <h3 class="text-xm text-gray-200 ml-1 mb-2">DPS:336</h3>
            <button class="w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-button font-medium flex items-center justify-center whitespace-nowrap transition-colors">
              <i class="ri-shopping-cart-line mr-2"></i>
-             Buy Now
+             Купить
            </button>
          </div>
        </div>
+        <!-- Product Card 5 -->
+        <!-- <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden w-full max-w-sm transition-transform hover:shadow-lg border border-gray-700">
+        <div class="h-48 overflow-hidden">
+          <img src="assets/module.jpg" alt="Laser" class="w-full h-full object-cover object-top transition-transform hover:scale-105" />
+        </div>
+        <div class="p-4">
+          <h2 class="text-xl font-bold text-gray-200 mb-2">[Premium] Обвес</h2>
+          <h3 class="text-xm text-gray-200 ml-1 mb-7">Повышает характеристики оружия</h3>
+          <button class="w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-button font-medium flex items-center justify-center whitespace-nowrap transition-colors">
+            <i class="ri-shopping-cart-line mr-2"></i>
+            Купить
+          </button>
+        </div>  
+      </div> -->
      </div>
    </div>
  </main>
+  <!-- Cart Overlay -->
+  <div class="overlay fixed inset-0 bg-black bg-opacity-50 z-50 "></div>
+
+  <!-- Cart Modal -->
+  <div class="cart-sidebar fixed top-0 right-[-100%] w-full md:w-96 h-full bg-white shadow-lg z-50 flex flex-col transition-transform duration-300 ease-in-out">
+    <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold text-gray-800">Your Cart</h2>
+            <button id="close-cart" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 focus:outline-none !rounded-button">
+                <i class="ri-close-line ri-lg"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-6 space-y-6">
+        <!-- Product 1 -->
+        <!-- <div class="flex space-x-4 pb-6 border-b border-gray-100">
+            <div class="w-20 h-20 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+                <img src="Фотка" alt="Wireless Headphones" class="w-full h-full object-cover object-top">
+            </div>
+            <div class="flex-1">
+                <h3 class="text-sm font-medium text-gray-800">Premium Wireless Headphones</h3>
+                <p class="text-xs text-gray-500 mt-1">Black | Noise Cancelling</p>
+                <div class="flex items-center justify-between mt-3">
+                    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-100 !rounded-button whitespace-nowrap" onclick="updateQuantity(this, -1)">
+                            <i class="ri-subtract-line"></i>
+                        </button>
+                        <input type="number" value="1" min="1" class="w-10 h-8 text-center text-sm border-none focus:outline-none">
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-100 !rounded-button whitespace-nowrap" onclick="updateQuantity(this, 1)">
+                            <i class="ri-add-line"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-medium">$249.99</span>
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 !rounded-button whitespace-nowrap">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Product 2 -->
+        <!-- <div class="flex space-x-4 pb-6 border-b border-gray-100">
+            <div class="w-20 h-20 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+                <img src="Фотка 2" alt="Фотка" class="w-full h-full object-cover object-top">
+            </div>
+            <div class="flex-1">
+                <h3 class="text-sm font-medium text-gray-800">Smart Watch Series 5</h3>
+                <p class="text-xs text-gray-500 mt-1">Brown Leather | 44mm</p>
+                <div class="flex items-center justify-between mt-3">
+                    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-100 !rounded-button whitespace-nowrap" onclick="updateQuantity(this, -1)">
+                            <i class="ri-subtract-line"></i>
+                        </button>
+                        <input type="number" value="1" min="1" class="w-10 h-8 text-center text-sm border-none focus:outline-none">
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-100 !rounded-button whitespace-nowrap" onclick="updateQuantity(this, 1)">
+                            <i class="ri-add-line"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-medium">$399.99</span>
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 !rounded-button whitespace-nowrap">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Product 3 -->
+        <!-- <div class="flex space-x-4 pb-6 border-b border-gray-100">
+            <div class="w-20 h-20 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+                <img src="Фотка" alt="Bluetooth Speaker" class="w-full h-full object-cover object-top">
+            </div>
+            <div class="flex-1">
+                <h3 class="text-sm font-medium text-gray-800">Portable Bluetooth Speaker</h3>
+                <p class="text-xs text-gray-500 mt-1">Teal | Waterproof</p>
+                <div class="flex items-center justify-between mt-3">
+                    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-100 !rounded-button whitespace-nowrap" onclick="updateQuantity(this, -1)">
+                            <i class="ri-subtract-line"></i>
+                        </button>
+                        <input type="number" value="1" min="1" class="w-10 h-8 text-center text-sm border-none focus:outline-none">
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-100 !rounded-button whitespace-nowrap" onclick="updateQuantity(this, 1)">
+                            <i class="ri-add-line"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-medium">$129.99</span>
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 !rounded-button whitespace-nowrap">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Product 4 -->
+        <!-- <div class="flex space-x-4 pb-6">
+            <div class="w-20 h-20 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+                <img src="Фотка" alt="Wireless Charger" class="w-full h-full object-cover object-top">
+            </div>
+            <div class="flex-1">
+                <h3 class="text-sm font-medium text-gray-800">Wireless Charging Pad</h3>
+                <p class="text-xs text-gray-500 mt-1">White | Fast Charging</p>
+                <div class="flex items-center justify-between mt-3">
+                    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-100 !rounded-button whitespace-nowrap" onclick="updateQuantity(this, -1)">
+                            <i class="ri-subtract-line"></i>
+                        </button>
+                        <input type="number" value="1" min="1" class="w-10 h-8 text-center text-sm border-none focus:outline-none">
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-100 !rounded-button whitespace-nowrap" onclick="updateQuantity(this, 1)">
+                            <i class="ri-add-line"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-medium">$59.99</span>
+                        <button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-500 !rounded-button whitespace-nowrap">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="p-6 border-t border-gray-200 bg-gray-50">
+        <div class="space-y-4">
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Subtotal</span>
+                <span class="font-medium">839.96 &#8381;</span>  <!-- Товарная сумма -->
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-600">Скидка</span>        <!-- Скидка -->
+                <span class="font-medium">500 &#8381;</span>    
+            </div>
+            <div class="flex justify-between text-base pt-4 border-t border-gray-200">
+                <span class="font-medium text-gray-800">Итого</span>
+                <span class="font-bold text-gray-900">839.96 &#8381;</span>    <!-- Итоговая цена -->
+            </div>
+            <div class="pt-4 space-y-3">
+                <button class="w-full py-3 bg-primary text-white font-medium rounded-button hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 whitespace-nowrap">
+                    Checkout
+                </button>
+                <button id="continue-shopping" class="w-full py-3 bg-white text-gray-700 font-medium border border-gray-300 rounded-button hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 whitespace-nowrap">
+                    Continue Shopping
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
   <!-- Footer -->
   <footer>
     <div class="container mx-auto px-4">
@@ -174,7 +380,7 @@
           </a>
         </div>
         <div class="text-center text-gray-400 text-sm">
-          <p>© 2025 JavelinMC. All rights reserved.</p>
+          <p>© 2025 JavelinMC. Все права защищены.</p>
         </div>
       </div>
     </div>
