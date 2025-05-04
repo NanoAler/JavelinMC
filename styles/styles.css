@@ -62,6 +62,8 @@
   .nav-link:hover::after {
     width: 100%;
   }
+
+  /* Cart sidebar */
   
   .cart-sidebar {
     position: fixed;
@@ -89,6 +91,30 @@
   .overlay.open {
       display: block; 
   }
+
+  /* Form */
+  form.form-example {
+    display: table;
+  }
+  
+  div.form-example {
+    display: table-row;
+  }
+  
+  label,
+  input {
+    display: table-cell;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    padding-right: 10px;
+  }
+
+  input{
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  }
+
 
   /* Social Icon Hover Effect */
   /* .social-icon:hover {
