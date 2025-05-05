@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavelinMC</title>
+    <script defer src="static/scripts/checkbox.js"></script>
+    <script>
+    if (
+        localStorage.getItem("theme") === "dark" ||
+        (!localStorage.getItem("theme") &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+        document.documentElement.classList.add("dark");
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.16">
+    </script>
+    <script>
+    tailwind.config = {
+        theme: {
+        extend: {
+            colors: {
+            primary: "#3b82f6",
+            secondary: "#64748b",
+            },
+            borderRadius: {
+            none: "0px",
+            sm: "4px",
+            DEFAULT: "8px",
+            md: "12px",
+            lg: "16px",
+            xl: "20px",
+            "2xl": "24px",
+            "3xl": "32px",
+            full: "9999px",
+            button: "8px",
+            },
+        },
+        },
+    };
+    </script>
+    <style>
+    :where([class^="ri-"])::before { content: "\f3c2"; }
+    .dark body { background-color: #111827; color: #e5e7eb; }
+    .dark .bg-white { background-color: #1f2937; }
+    .dark .text-gray-800 { color: #f3f4f6; }
+    .dark .text-gray-600 { color: #d1d5db; }
+    .dark .text-gray-500 { color: #9ca3af; }
+    .dark .border-gray-200 { border-color: #374151; }
+    .dark .border-gray-300 { border-color: #4b5563; }
+    .dark .bg-gray-50 { background-color: #111827; }
+    .dark .bg-gray-100 { background-color: #1f2937; }
+    .dark .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+    .dark .hover\:bg-gray-50:hover { background-color: #374151; }
+    .dark .divide-gray-200 > * + * { border-color: #374151; }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+    input[type="number"] {
+    -moz-appearance: textfield;
+    }
+    .custom-checkbox {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #cbd5e1;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    }
+    .custom-checkbox.checked {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+    }
+    .custom-checkbox.checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    }
+    .quantity-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+    .quantity-input button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8fafc;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    }
+    .quantity-input button:hover {
+    background-color: #e2e8f0;
+    }
+    .quantity-input input {
+    width: 40px;
+    height: 32px;
+    text-align: center;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    }
+    </style>
+      <!-- External Styles -->
+  <link rel="stylesheet" href="static/styles.css" />
+</head>
+<body>
+    <header class="w-full bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="{{ url_for('index') }}" class="text-2xl font-bold tracking-tight text-primary">JavelinMC</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="/#shop" class="nav-link text-gray-200 font-medium hover:text-primary transition-colors">Shop</a>
+                <a href="#" class="nav-link text-gray-200 font-medium hover:text-primary transition-colors">Support</a>
+                <a href="#" class="nav-link text-gray-200 font-medium hover:text-primary transition-colors">Rules</a>
+            </nav>
+            <div class="flex items-center gap-4">
+            <button id="themeToggle" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
+            <i class="ri-sun-line dark:ri-moon-line text-xl"></i>
+            </button>
+            <a href="{{ url_for('cart') }}" id="cart-toggle" class="w-10 h-10 flex items-center justify-center text-gray-200 hover:text-primary transition-colors relative">
+                <i class="ri-shopping-cart-line ri-lg"></i>
+                <span class="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">{{ counter }}</span>
+            </a>
+            <!-- <a href="{{ url_for('index') }}" class="text-primary flex items-center hover:text-primary/80 transition-colors whitespace-nowrap">
+            <span class="w-5 h-5 flex items-center justify-center mr-1">
+            <i class="ri-arrow-left-line"></i>
+            </span>
+            Продолжить покупки
+            </a> -->
+            </div>
+        </div>
+    </header>
+    <main class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded shadow-sm p-6 mb-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-lg font-medium text-gray-800">Товары ( {{ counter }} )</h2>
+            </div>
+            <div class="divide-y divide-gray-200">
+                {% if cart %}
+                <!-- Product -->   <!-- НЕ ТРОГАТЬ ЭТО ДЕРЬМО -->
+                {% for product in cart %}
+                <div class="py-6 first:pt-0">
+                    <div class="flex items-start">
+                        <div class="ml-4 flex-1 flex flex-col md:flex-row">
+                            <div class="w-full md:w-24 h-24 bg-gray-100 rounded overflow-hidden mb-4 md:mb-0 md:mr-6 flex-shrink-0">
+                                <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-base font-medium text-gray-800">{{ product.name }}</h3>
+                                        <p class="text-sm text-gray-500 mt-1">{{ product.description }}</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0 md:text-right">
+                                        <p class="text-base font-medium text-gray-800">{{ product.price }} &#8381;</p>
+                                    </div>
+                                </div>
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4">
+                                    <div>
+                                    </div>
+                                    <form method="POST" action="{{ url_for('remove_from_cart', product_id=product.id) }}" style="display: inline;">
+                                        <button type="submit" class="text-secondary hover:text-red-500 transition-colors mt-3 sm:mt-0 flex items-center text-sm"><span class="w-4 h-4 flex items-center justify-center mr-1">
+                                            <i class="ri-delete-bin-line"></i>
+                                            </span>Удалить</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- EndProduct -->
+                {% else %}
+                <p>Ваша корзина пуста.</p>
+            {% endif %}
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-2">
+        <div class="bg-white rounded shadow-sm p-6">
+        <h2 class="text-lg font-medium text-gray-800 mb-4">Согласие на обработку персональных данных</h2>
+        <div class="flex items-start mb-6">
+        <div class="flex items-center h-5 mt-0.5">
+        <div class="custom-checkbox" id="consentCheckbox"></div>
+        </div>
+        <label for="consentCheckbox" class="ml-3 text-sm text-gray-600">
+            Я принимаю условия <a href="#" class="text-primary hover:underline">пользовательского соглашения</a>. Я понимаю, что моя информация будет использоваться только для обработки заказов, доставки и обслуживания клиентов. <span class="text-red-500">*</span>
+        </label>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4">
+            <form method="POST" action="{{ url_for('clear_cart') }}">
+                <button id="emptyCartBtn" class="w-full sm:w-auto px-8 py-4 bg-red-50 border-2 border-red-200 text-red-600 font-medium rounded-button hover:bg-red-100 hover:border-red-300 transition-all duration-200 shadow-sm whitespace-nowrap text-base">
+                    <span class="w-5 h-5 inline-flex items-center justify-center mr-2">
+                    <i class="ri-delete-bin-line"></i>
+                    </span>Очистить корзину</button>
+            </form>
+            <button id="continueShoppingBtn" class="w-full sm:w-auto px-8 py-4 bg-primary/10 border-2 border-primary/20 text-primary font-medium rounded-button hover:bg-primary/20 hover:border-primary/30 transition-all duration-200 shadow-sm whitespace-nowrap text-base">
+            <span class="w-5 h-5 inline-flex items-center justify-center mr-2">
+            <i class="ri-arrow-left-line"></i>
+            </span>Продолжить покупки</button>
+        </div>
+        </div>
+        </div>
+        <div class="md:col-span-1">
+        <div class="bg-white rounded shadow-sm p-6 sticky top-6">
+        <h2 class="text-lg font-medium text-gray-800 mb-4">Итоговая сумма</h2>
+        <div class="space-y-3 mb-6">
+            <!-- <div class="flex justify-between">
+                <span class="text-gray-600">Subtotal ({{ counter }} items)</span>
+                <span class="text-gray-800">500 &#8381;</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-600">Скидка</span>
+                <span class="text-gray-800">9000 &#8381;</span>
+            </div> -->
+            <div class="border-t border-gray-200 pt-3 mt-3">
+            <div class="flex justify-between">
+                <span class="text-lg font-medium text-gray-800">Итого</span>
+                <span class="text-lg font-medium text-gray-800">{{ total_price }} &#8381;</span>
+            </div>
+            </div>
+        </div>
+                <button id="checkoutBtn" class="w-full px-6 py-3 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors flex items-center justify-center whitespace-nowrap">
+                        <span class="w-5 h-5 flex items-center justify-center mr-1"><i class="ri-secure-payment-line"></i></span>К оформлению</button>
+        </div>
+        </div>
+        </div>
+    </main>
+    <!-- Footer -->
+  <footer class="mb-0">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col items-center">
+        <div class="font-['Pacifico'] text-2xl text-primary mb-6">JavelinMC</div>
+        <div class="flex flex-wrap justify-center mb-8 gap-4">
+          <a href="https://t.me/jav_elinMC" class="social-icon">
+            <i class="ri-telegram-fill text-gray-200"></i>
+          </a>
+          <a href="https://discord.gg/UCaW56CFwp" class="social-icon">
+            <i class="ri-discord-fill text-gray-200"></i>
+          </a>
+          <a href="https://www.tiktok.com/@javelinmc0?_t=ZM-8v4fh4i4CMY&_r=1" class="social-icon">
+            <i class="ri-tiktok-fill text-gray-200"></i>
+          </a>
+        </div>
+        <div class="text-center text-gray-400 text-sm">
+          <p>© 2025 JavelinMC. Все права защищены.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script type="text/javascript" crossorigin="anonymous" src="./Shopping Cart_files/config.js.Без названия"></script><script type="text/javascript" crossorigin="anonymous" src="./Shopping Cart_files/dead-clicks-autocapture.js.Без названия"></script><script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    themeToggle.addEventListener('click', function() {
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        } else {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+    });
+    </script>
+</body>
+</html>

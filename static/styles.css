@@ -72,6 +72,20 @@
     width: 100%; 
     max-width: 24rem; 
     height: 100%;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 50;
+    transform: translateX(100%); 
+    transition: transform 0.5s ease; 
+  }
+
+  .cart-sidebar .light-theme {
+    position: fixed;
+    top: 0;
+    right: -100%; 
+    width: 100%; 
+    max-width: 24rem; 
+    height: 100%;
     background-color: white;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
     z-index: 50;
@@ -89,7 +103,7 @@
   }
 
   .overlay.open {
-      display: block; 
+    display: block; 
   }
 
   /* Form */
@@ -146,6 +160,11 @@
     background-color: #374151;
     border-radius: 9999px;
     transition: all 0.15s ease-in-out;
+  }
+
+  .py-6{
+    float: none;
+    overflow: auto;
   }
   
   .social-icon:hover {
